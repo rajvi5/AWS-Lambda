@@ -1,3 +1,4 @@
+----------------------s3 code(python)---------------------------
 import json
 import urllib.parse
 import boto3
@@ -23,7 +24,7 @@ def lambda_handler(event, context):
         raise e
 
 
-----------------------
+----------api gateway json------------
 
 
 {
@@ -42,7 +43,7 @@ def lambda_handler(event, context):
     "price" : 480
 }
 
-------------------------------------------------------------------------
+--------------------notes------------------------
 
 Slide 3: 
 When we say ‘manage’, it includes launching or terminating instances, health checkups, auto-scaling, updating or patching new updates etc.
@@ -81,7 +82,8 @@ For media-related applications, Lambda can process images and videos, performing
 10. Data Warehousing ETL
 Lambda functions can extract, transform, and load (ETL) data into data warehouses like Amazon Redshift or Amazon Snowflake, enabling efficient data analytics.
 
-References:
+-----------------------References-----------------------
+
 https://www.youtube.com/watch?v=seaBeltaKhw --blueprint demo	
 https://www.youtube.com/watch?v=J0aEfUUervE&t=1301s --S3 demo
 https://www.youtube.com/watch?v=3Ar1ABlD_Vs	--API Gateway demo
