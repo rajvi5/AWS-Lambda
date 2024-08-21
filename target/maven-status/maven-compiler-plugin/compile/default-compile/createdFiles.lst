@@ -1,0 +1,6 @@
+org\example\controller\PingController.class
+org\example\Application.class
+org\example\dto\Book.class
+org\example\service\BookService.class
+org\example\StreamLambdaHandler.class
+org\example\controller\BookController.class
