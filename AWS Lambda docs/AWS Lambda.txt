@@ -1,0 +1,99 @@
+----------------------s3 code(python)---------------------------
+import json
+import urllib.parse
+import boto3
+
+print('Loading function')
+
+s3 = boto3.client('s3')
+
+
+def lambda_handler(event, context):
+    #print("Received event: " + json.dumps(event, indent=2))
+
+    # Get the object from the event and show its content type
+    bucket = event['Records'][0]['s3']['bucket']['name']
+    key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'], encoding='utf-8')
+    try:
+        response = s3.get_object(Bucket=bucket, Key=key)
+        print("CONTENT TYPE: " + response['ContentType'])
+        return response['ContentType']
+    except Exception as e:
+        print(e)
+        print('Error getting object {} from bucket {}. Make sure they exist and your bucket is in the same region as this function.'.format(key, bucket))
+        raise e
+
+
+----------api gateway json------------
+
+
+{
+    "id" : 1,
+    "name" : "Serverless Programming - AWS Lambda",
+    "price" : 1500
+}
+{
+    "id" : 2,
+    "name" : "The Power of Subconscious Mind",
+   "price" : 750
+}
+{
+    "id" : 3,
+    "name" : "Personality development",
+    "price" : 480
+}
+
+--------------------notes------------------------
+
+Slide 3: 
+When we say ‘manage’, it includes launching or terminating instances, health checkups, auto-scaling, updating or patching new updates etc.
+
+
+Use Cases of AWS Lambda
+Now, let’s dive into the ten most common use cases of AWS Lambda:
+
+1. Real-time Data Processing
+AWS Lambda is perfect for processing real-time data streams. You can use it to analyze, transform, and filter data as it flows in from sources like IoT devices, clickstreams, or social media.
+
+2. File and Data Transformation
+Lambda can be triggered by file uploads to S3 buckets, allowing you to automatically transform and process data files. This is useful for tasks like image resizing, PDF conversion, and data validation.
+
+3. API Backend
+Many organizations use Lambda to build serverless API backends using Amazon API Gateway. This approach provides a scalable and cost-effective solution for handling API requests.
+
+4. Chatbots and Natural Language Processing (NLP)
+Developers can create chatbots and NLP applications using Lambda, which can process and respond to user messages, making interactions with applications more conversational and user-friendly.
+
+5. IoT Device Management
+AWS Lambda can be utilized to manage and control IoT devices. It can execute code in response to device events, such as sensor data updates, device registrations, or firmware updates.
+
+6. Scheduled Tasks and Cron Jobs
+Lambda functions can be scheduled to run at specific intervals, making them ideal for tasks like data backups, log cleanup, and other routine maintenance tasks.
+
+7. Data Validation and Enrichment
+Lambda functions can validate and enrich incoming data, ensuring that only clean and enriched data enters your databases or data warehouses.
+
+8. User Authentication and Authorization
+Lambda can be used to implement custom authentication and authorization logic, enhancing security in applications and granting access to authorized users.
+
+9. Image and Video Processing	
+For media-related applications, Lambda can process images and videos, performing tasks such as resizing, watermarking, and video transcoding on the fly.
+
+10. Data Warehousing ETL
+Lambda functions can extract, transform, and load (ETL) data into data warehouses like Amazon Redshift or Amazon Snowflake, enabling efficient data analytics.
+
+-----------------------References-----------------------
+
+https://www.youtube.com/watch?v=seaBeltaKhw --blueprint demo	
+https://www.youtube.com/watch?v=J0aEfUUervE&t=1301s --S3 demo
+https://www.youtube.com/watch?v=3Ar1ABlD_Vs	--API Gateway demo
+https://www.youtube.com/watch?v=97q30JjEq9Y -- Backup files in S3 using lambda demo
+https://intellipaat.com/blog/tutorial/amazon-web-services-aws-tutorial/aws-lambda-tutorial/
+https://medium.com/edureka/aws-lambda-tutorial-cadd47fbd39b
+https://intellipaat.com/blog/what-is-amazon-web-services-aws/
+https://www.geeksforgeeks.org/introduction-to-aws-lambda/?ref=lbp
+https://www.tutorialspoint.com/aws_lambda/aws_lambda_function_in_java.htm
+https://www.slideshare.net/slideshow/introduction-to-aws-lambda-and-serverless-applications/128306626#5
+https://gartsolutions.medium.com/an-overview-of-aws-lambda-cd53d074cf3f
+https://gartsolutions.medium.com/an-overview-of-aws-lambda-cd53d074cf3f
+https://georgemao.medium.com/the-ultimate-guide-to-aws-lambda-development-6e4aae00d964
